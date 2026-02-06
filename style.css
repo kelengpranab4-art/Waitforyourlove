@@ -26,9 +26,22 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow-x: hidden;
     position: relative;
     color: var(--text-white);
+    animation: fadeInPage 1s ease-out forwards;
+}
+
+@keyframes fadeInPage {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* 3D Animated Background */
@@ -358,6 +371,33 @@ body {
     font-weight: 600;
     color: var(--text-white);
     opacity: 0.9;
+    margin-bottom: 40px;
+}
+
+.next-step-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 18px;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 10px 20px rgba(255, 45, 85, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.next-step-btn:hover {
+    transform: translateY(-5px);
+    background: var(--primary-hover);
+    box-shadow: 0 15px 30px rgba(255, 45, 85, 0.5);
+}
+
+.next-step-btn i {
+    font-size: 20px;
 }
 
 /* Hearts Animation in Success */
@@ -454,24 +494,71 @@ body {
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
+    body {
+        align-items: flex-start;
+        overflow-y: auto;
+    }
+
     .title {
-        font-size: 48px;
+        font-size: 42px;
+        line-height: 1.2;
+    }
+
+    .container,
+    .phases-container,
+    .love-container {
+        margin-top: 100px;
+        padding-bottom: 50px;
     }
 
     .card {
-        padding: 40px 30px;
+        padding: 40px 25px;
+        width: 100%;
     }
 
     .success-title {
-        font-size: 70px;
+        font-size: 60px;
     }
 
     .success-message {
-        font-size: 24px;
+        font-size: 20px;
+        padding: 0 20px;
     }
 
     .nav-link {
-        padding: 10px 18px;
-        font-size: 13px;
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+
+    .navbar {
+        width: 90%;
+        padding: 8px;
+    }
+
+    .phase-card {
+        padding: 30px 20px;
+    }
+
+    .love-card {
+        padding: 40px 25px;
+    }
+
+    .reason-text {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 36px;
+    }
+
+    .btn {
+        padding: 14px 28px;
+        font-size: 14px;
+    }
+
+    .bear-image {
+        width: 200px;
     }
 }
