@@ -344,6 +344,7 @@ body {
     align-items: center;
     z-index: 3000;
     overflow: hidden;
+    padding: 20px;
 }
 
 .success-page.active {
@@ -353,6 +354,9 @@ body {
 .success-content {
     text-align: center;
     z-index: 10;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .success-title {
@@ -520,9 +524,14 @@ body {
         font-size: 60px;
     }
 
+    .success-page {
+        padding: 40px 20px;
+        align-items: center;
+    }
+
     .success-message {
         font-size: 20px;
-        padding: 0 20px;
+        margin-bottom: 30px;
     }
 
     .nav-link {
