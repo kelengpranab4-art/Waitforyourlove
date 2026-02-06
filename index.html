@@ -9,23 +9,33 @@
 </head>
 
 <body>
+    <!-- 3D Background Elements -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="floating-elements" id="floatingElements"></div>
+
     <nav class="navbar">
         <a href="index.html" class="nav-link active">Home</a>
         <a href="phases.html" class="nav-link">Phases</a>
         <a href="love.html" class="nav-link">Reasons Why</a>
     </nav>
+
     <!-- Main Valentine Card -->
     <div class="container" id="mainCard">
         <div class="card">
-            <div class="project-tag">Project</div>
+            <div class="project-tag">Valentine 2026</div>
 
             <h1 class="title">Be My Valentine</h1>
 
             <div class="bear-container">
-                <img src="bear.png" alt="Cute Bear" class="bear-image">
+                <img src="bear.png" alt="Cute Bear" class="bear-image" id="mainBear">
             </div>
 
-            <p class="question">Will you be my Valentine? 💕</p>
+            <p class="question">Will you be my Valentine? ✨</p>
 
             <div class="buttons-container">
                 <button class="btn btn-yes" id="yesBtn">Yes! 💖</button>
@@ -34,19 +44,12 @@
         </div>
     </div>
 
-    <!-- Success Page (Hidden Initially) -->
+    <!-- Success Page -->
     <div class="success-page" id="successPage">
+        <div class="hearts-rain" id="heartsRain"></div>
         <div class="success-content">
             <h1 class="success-title">Yay! 🎉</h1>
-            <p class="success-message">I knew you'd say yes! 💕</p>
-            <div class="hearts-animation">
-                <span class="heart">💖</span>
-                <span class="heart">💕</span>
-                <span class="heart">💗</span>
-                <span class="heart">💝</span>
-                <span class="heart">💓</span>
-                <span class="heart">❤️</span>
-            </div>
+            <p class="success-message">You made my day! 💕</p>
         </div>
         <canvas id="confetti"></canvas>
     </div>

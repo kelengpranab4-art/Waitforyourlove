@@ -3,6 +3,7 @@ const yesBtn = document.getElementById('yesBtn');
 const noBtn = document.getElementById('noBtn');
 const mainCard = document.getElementById('mainCard');
 const successPage = document.getElementById('successPage');
+const floatingContainer = document.getElementById('floatingElements');
 
 // No button messages that cycle through
 const noMessages = [
@@ -19,10 +20,24 @@ const noMessages = [
 let noClickCount = 0;
 let yesBtnScale = 1;
 
+// Background Heart Floating Logic
+function createFloatingHearts() {
+    const heartSymbols = ['❤️', '💖', '💕', '💗', '💓', '✨'];
+    for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+        heart.style.setProperty('--x', Math.random() * 100 + '%');
+        heart.style.setProperty('--d', (Math.random() * 10 + 5) + 's');
+        heart.style.animationDelay = Math.random() * 10 + 's';
+        floatingContainer.appendChild(heart);
+    }
+}
+
+createFloatingHearts();
+
 // Function to move the No button to a random position
 function moveNoButton() {
-    const container = document.querySelector('.card');
-    const containerRect = container.getBoundingClientRect();
     const btnRect = noBtn.getBoundingClientRect();
     
     // Calculate maximum positions to keep button within viewport
@@ -37,6 +52,7 @@ function moveNoButton() {
     noBtn.style.position = 'fixed';
     noBtn.style.left = randomX + 'px';
     noBtn.style.top = randomY + 'px';
+    noBtn.style.zIndex = '1000';
     
     // Change button text
     noClickCount++;
@@ -45,104 +61,84 @@ function moveNoButton() {
     }
     
     // Increase Yes button size
-    yesBtnScale += 0.15;
+    yesBtnScale += 0.2;
     yesBtn.style.transform = `scale(${yesBtnScale})`;
-    yesBtn.style.transition = 'transform 0.3s ease';
 }
 
-// Function to create confetti
-function createConfetti() {
+// Improved Confetti logic
+function startConfetti() {
     const canvas = document.getElementById('confetti');
     const ctx = canvas.getContext('2d');
-    
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
-    const confettiPieces = [];
-    const confettiCount = 150;
-    const colors = ['#ff4d6d', '#ff758f', '#ffd6e0', '#ffb3c1', '#ff8fa3', '#c9184a'];
-    
-    // Create confetti pieces
-    for (let i = 0; i < confettiCount; i++) {
-        confettiPieces.push({
+
+    let particles = [];
+    const colors = ['#ff2d55', '#ff4d6d', '#ff8fa3', '#ffffff', '#9333ea'];
+
+    for (let i = 0; i < 150; i++) {
+        particles.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height - canvas.height,
-            width: Math.random() * 10 + 5,
-            height: Math.random() * 10 + 5,
+            size: Math.random() * 8 + 4,
             color: colors[Math.floor(Math.random() * colors.length)],
-            speedY: Math.random() * 3 + 2,
-            speedX: Math.random() * 2 - 1,
+            speedX: Math.random() * 4 - 2,
+            speedY: Math.random() * 4 + 2,
             rotation: Math.random() * 360,
-            rotationSpeed: Math.random() * 5 - 2.5
+            rotationSpeed: Math.random() * 10 - 5
         });
     }
-    
-    // Animate confetti
-    function animateConfetti() {
+
+    function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        confettiPieces.forEach((piece, index) => {
+        particles.forEach(p => {
             ctx.save();
-            ctx.translate(piece.x, piece.y);
-            ctx.rotate(piece.rotation * Math.PI / 180);
-            ctx.fillStyle = piece.color;
-            ctx.fillRect(-piece.width / 2, -piece.height / 2, piece.width, piece.height);
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation * Math.PI / 180);
+            ctx.fillStyle = p.color;
+            ctx.font = `${p.size * 2}px serif`;
+            ctx.fillText(Math.random() > 0.5 ? '❤️' : '✨', 0, 0);
             ctx.restore();
-            
-            // Update position
-            piece.y += piece.speedY;
-            piece.x += piece.speedX;
-            piece.rotation += piece.rotationSpeed;
-            
-            // Reset if out of bounds
-            if (piece.y > canvas.height) {
-                piece.y = -20;
-                piece.x = Math.random() * canvas.width;
+
+            p.x += p.speedX;
+            p.y += p.speedY;
+            p.rotation += p.rotationSpeed;
+
+            if (p.y > canvas.height) {
+                p.y = -20;
+                p.x = Math.random() * canvas.width;
             }
         });
-        
-        requestAnimationFrame(animateConfetti);
+        requestAnimationFrame(animate);
     }
-    
-    animateConfetti();
+    animate();
 }
 
 // Event Listeners
-noBtn.addEventListener('mouseenter', moveNoButton);
-noBtn.addEventListener('click', moveNoButton);
+if (noBtn) {
+    noBtn.addEventListener('mouseenter', moveNoButton);
+    noBtn.addEventListener('click', moveNoButton);
+    noBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        moveNoButton();
+    });
+}
 
-// For mobile touch
-noBtn.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    moveNoButton();
-});
+if (yesBtn) {
+    yesBtn.addEventListener('click', () => {
+        mainCard.style.opacity = '0';
+        mainCard.style.transform = 'translateY(-100px) rotateX(20deg)';
+        setTimeout(() => {
+            mainCard.style.display = 'none';
+            successPage.classList.add('active');
+            startConfetti();
+        }, 600);
+    });
+}
 
-yesBtn.addEventListener('click', () => {
-    // Hide main card
-    mainCard.style.display = 'none';
-    
-    // Show success page
-    successPage.classList.add('active');
-    
-    // Create confetti animation
-    createConfetti();
-    
-    // Play a little celebration animation
-    setTimeout(() => {
-        const successTitle = document.querySelector('.success-title');
-        successTitle.style.animation = 'bounce 0.5s ease infinite';
-    }, 100);
-});
-
-// Prevent No button from being clicked easily on mobile
-noBtn.addEventListener('touchmove', (e) => {
-    e.preventDefault();
-});
-
-// Handle window resize for confetti
+// Handle window resize
 window.addEventListener('resize', () => {
     const canvas = document.getElementById('confetti');
-    if (successPage.classList.contains('active')) {
+    if (canvas) {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     }
