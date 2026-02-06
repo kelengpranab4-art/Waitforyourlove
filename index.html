@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine 💝</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main Valentine Card -->
+    <div class="container" id="mainCard">
+        <div class="card">
+            <div class="project-tag">Project</div>
+            
+            <h1 class="title">Be My Valentine</h1>
+            
+            <div class="bear-container">
+                <img src="bear.png" alt="Cute Bear" class="bear-image">
+            </div>
+            
+            <p class="question">Will you be my Valentine? 💕</p>
+            
+            <div class="buttons-container">
+                <button class="btn btn-yes" id="yesBtn">Yes! 💖</button>
+                <button class="btn btn-no" id="noBtn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Page (Hidden Initially) -->
+    <div class="success-page" id="successPage">
+        <div class="success-content">
+            <h1 class="success-title">Yay! 🎉</h1>
+            <p class="success-message">I knew you'd say yes! 💕</p>
+            <div class="hearts-animation">
+                <span class="heart">💖</span>
+                <span class="heart">💕</span>
+                <span class="heart">💗</span>
+                <span class="heart">💝</span>
+                <span class="heart">💓</span>
+                <span class="heart">❤️</span>
+            </div>
+        </div>
+        <canvas id="confetti"></canvas>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
