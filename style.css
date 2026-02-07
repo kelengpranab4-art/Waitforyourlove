@@ -383,6 +383,13 @@ body {
     filter: drop-shadow(0 0 30px rgba(255, 45, 85, 0.5));
 }
 
+.emoji-fix {
+    background: none;
+    -webkit-text-fill-color: initial;
+    text-shadow: none;
+    display: inline-block;
+}
+
 .success-message {
     font-size: 32px;
     font-weight: 600;
