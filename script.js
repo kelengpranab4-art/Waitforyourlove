@@ -39,27 +39,31 @@ createFloatingHearts();
 // Function to move the No button to a random position
 function moveNoButton() {
     const btnRect = noBtn.getBoundingClientRect();
-    
+
     // Calculate maximum positions to keep button within viewport
-    const maxX = window.innerWidth - btnRect.width - 40;
-    const maxY = window.innerHeight - btnRect.height - 40;
-    
-    // Generate random position
-    const randomX = Math.random() * maxX;
-    const randomY = Math.random() * maxY;
-    
+    // Add margin for navbar (approx 80px) and safety padding
+    const navbarHeight = 80;
+    const padding = 20;
+
+    const maxX = window.innerWidth - btnRect.width - padding;
+    const maxY = window.innerHeight - btnRect.height - padding;
+
+    // Generate random position, ensuring it doesn't overlap with navbar area at the top
+    const randomX = Math.max(padding, Math.random() * maxX);
+    const randomY = Math.max(navbarHeight + padding, Math.random() * maxY);
+
     // Apply new position
     noBtn.style.position = 'fixed';
     noBtn.style.left = randomX + 'px';
     noBtn.style.top = randomY + 'px';
     noBtn.style.zIndex = '1000';
-    
+
     // Change button text
     noClickCount++;
     if (noClickCount < noMessages.length) {
         noBtn.textContent = noMessages[noClickCount];
     }
-    
+
     // Increase Yes button size
     yesBtnScale += 0.2;
     yesBtn.style.transform = `scale(${yesBtnScale})`;

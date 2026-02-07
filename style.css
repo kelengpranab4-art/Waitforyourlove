@@ -593,6 +593,38 @@ body {
     }
 
     .bear-image {
-        width: 200px;
+        width: 180px;
+    }
+
+    .buttons-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 380px) {
+    .navbar {
+        top: 15px;
+        padding: 5px;
+        width: 95%;
+    }
+
+    .nav-link {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+
+    .card {
+        padding: 30px 15px;
+    }
+
+    .title {
+        font-size: 32px;
     }
 }
