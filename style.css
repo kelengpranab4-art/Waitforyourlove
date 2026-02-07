@@ -641,3 +641,16 @@ body {
         font-size: 32px;
     }
 }
+
+/* Fix for short screens (laptops/landscape) where navbar covers content */
+@media (max-height: 800px) {
+    body {
+        align-items: flex-start;
+        padding-top: 100px;
+        height: auto;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+}
