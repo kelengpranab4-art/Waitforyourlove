@@ -536,8 +536,14 @@ body {
     .container,
     .phases-container,
     .love-container {
-        margin-top: 100px;
+        margin-top: 130px;
+        /* Increased from 100px to avoid navbar overlap */
         padding-bottom: 50px;
+    }
+
+    .bear-image {
+        border-radius: 20px;
+        /* Make the white box look like a card */
     }
 
     .card {
